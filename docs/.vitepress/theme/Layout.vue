@@ -10,6 +10,8 @@ import VPSidebar from './components/VPSidebar.vue'
 import VPContent from './components/VPContent.vue'
 import VPFooter from './components/VPFooter.vue'
 
+import { Md5 } from 'ts-md5';
+
 import 'gitalk/dist/gitalk.css'
 import Gitalk from 'gitalk'
 
@@ -39,7 +41,6 @@ watch(() => route.path,
 );
 
 const initCommit = () => {
-  //  const id = location.pathname.replace('.html', '')
     const gitalk = new Gitalk({
       clientID: '6722bd665d1907893916',
       clientSecret: 'ab854ba77675e7fa7c38cc416feede40f2cb2159',
@@ -47,7 +48,7 @@ const initCommit = () => {
       owner: 'freedomdebug',
       admin: ['freedomdebug'],
       // number: 1,
-      id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: Md5.hashStr(location.href),      // Ensure uniqueness and length less than 50
       distractionFreeMode: false  // Facebook-like distraction free mode
     })
 
