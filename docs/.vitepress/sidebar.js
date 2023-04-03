@@ -208,6 +208,10 @@ module.exports = [
         text: 'typescript通览.md',
         link: '/files/typescript/typescript通览',
       },
+      {
+        text: '代码碎片.md',
+        link: '/files/typescript/代码碎片',
+      },
     ],
   },
   {
