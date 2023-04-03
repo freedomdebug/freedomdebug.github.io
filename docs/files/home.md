@@ -1,16 +1,11 @@
 # Stay Hungry Stay Foolish！
 
 ## 最新
-[yaml](/files/others/yaml)
-
-[Multicast](/files/others/Multicast)
-
-[TOML](https://toml.io/cn/)
-
-
-[多线程](/files/others/多线程)
-
-[前端精准计时器](/files/others/前端精准计时器)
+* [yaml](/files/others/yaml)
+* [Multicast](/files/others/Multicast)
+* [TOML](https://toml.io/cn/)
+* [多线程](/files/others/多线程)
+* [前端精准计时器](/files/others/前端精准计时器)
 
 
 ## 关键词
@@ -21,8 +16,6 @@
 ## 小tips
 
 * [设计思维](/files/软件设计/设计思维)
-
 * 《JavaScript设计模式与开发实践》网友读书笔记
 > https://github.com/freedomdebug/JS-design-pattern
-> 
 > https://github.com/freedomdebug/JavaScript-Design-Patterns
