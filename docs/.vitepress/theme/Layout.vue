@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, onMounted, watch, ref } from 'vue'
+import { provide, onMounted, watch, ref, nextTick } from 'vue'
 import { useRoute  } from 'vitepress'
 import { useSidebar, useCloseSidebarOnEscape } from './composables/sidebar'
 import VPSkipLink from './components/VPSkipLink.vue'
@@ -24,14 +24,17 @@ useCloseSidebarOnEscape(isSidebarOpen, closeSidebar)
 provide('close-sidebar', closeSidebar)
 
 const commidKey = ref<string>(location.pathname)
-onMounted(() => {
+onMounted(async () => {
+   await nextTick()
    initCommit()
 })
 
 const route = useRoute();
 watch(() => route.path,
-  () => {
+  async () => {
     commidKey.value = location.pathname
+    await nextTick()
+    initCommit()
   }
 );
 
