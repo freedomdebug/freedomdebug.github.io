@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, onMounted, watch } from 'vue'
+import { provide, onMounted, watch, ref } from 'vue'
 import { useRoute  } from 'vitepress'
 import { useSidebar, useCloseSidebarOnEscape } from './composables/sidebar'
 import VPSkipLink from './components/VPSkipLink.vue'
@@ -23,6 +23,7 @@ useCloseSidebarOnEscape(isSidebarOpen, closeSidebar)
 
 provide('close-sidebar', closeSidebar)
 
+const commidKey = ref<string>(location.pathname)
 onMounted(() => {
    initCommit()
 })
@@ -30,7 +31,7 @@ onMounted(() => {
 const route = useRoute();
 watch(() => route.path,
   () => {
-    initCommit();
+    commidKey.value = location.pathname
   }
 );
 
@@ -68,7 +69,7 @@ const initCommit = () => {
 
       <template #doc-before><slot name="doc-before" /></template>
       <template #doc-after><slot name="doc-after" />
-        <div id="gitalk-container"></div>
+        <div id="gitalk-container" :key="commidKey"></div>
       </template>
 
       <template #aside-top><slot name="aside-top" /></template>
