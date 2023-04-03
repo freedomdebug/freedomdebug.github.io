@@ -28,13 +28,12 @@ onMounted(() => {
 })
 
 const router = useRouter();
-watch(() => router.route.data.relativePath, (path) => {
-  console.log(path)
+watch(() => router, () => {
   initCommit()
 });
 
 const initCommit = () => {
-   const id = location.pathname.replace('.html', '')
+  //  const id = location.pathname.replace('.html', '')
     const gitalk = new Gitalk({
       clientID: '6722bd665d1907893916',
       clientSecret: 'ab854ba77675e7fa7c38cc416feede40f2cb2159',
@@ -42,7 +41,7 @@ const initCommit = () => {
       owner: 'freedomdebug',
       admin: ['freedomdebug'],
       // number: 1,
-      id,      // Ensure uniqueness and length less than 50
+      // id,      // Ensure uniqueness and length less than 50
       distractionFreeMode: false  // Facebook-like distraction free mode
     })
 
