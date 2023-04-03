@@ -205,8 +205,8 @@ module.exports = [
     text: 'typescript',
     items: [
       {
-        text: 'typescript通览.md',
-        link: '/files/typescript/typescript通览',
+        text: 'typescript手书.md',
+        link: '/files/typescript/typescript手书',
       },
       {
         text: '代码碎片.md',
