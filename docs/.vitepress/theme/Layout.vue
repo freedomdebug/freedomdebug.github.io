@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { provide, onMounted, watch } from 'vue'
-import { useRouter  } from 'vitepress'
+import { useRoute  } from 'vitepress'
 import { useSidebar, useCloseSidebarOnEscape } from './composables/sidebar'
 import VPSkipLink from './components/VPSkipLink.vue'
 import VPBackdrop from './components/VPBackdrop.vue'
@@ -27,10 +27,12 @@ onMounted(() => {
    initCommit()
 })
 
-const router = useRouter();
-watch(() => router, () => {
-  initCommit()
-});
+const route = useRoute();
+watch(() => route.path,
+  () => {
+    initCommit();
+  }
+);
 
 const initCommit = () => {
   //  const id = location.pathname.replace('.html', '')
