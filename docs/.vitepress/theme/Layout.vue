@@ -26,10 +26,10 @@ useCloseSidebarOnEscape(isSidebarOpen, closeSidebar)
 provide('close-sidebar', closeSidebar)
 
 const commidKey = ref<string>(location.pathname)
-onMounted(async () => {
-   await nextTick()
-   initCommit()
-})
+// onMounted(async () => {
+//    await nextTick()
+//    initCommit()
+// })
 
 const route = useRoute();
 watch(() => route.path,
@@ -37,6 +37,9 @@ watch(() => route.path,
     commidKey.value = location.pathname
     await nextTick()
     initCommit()
+  },
+  {
+    immediate: true
   }
 );
 
