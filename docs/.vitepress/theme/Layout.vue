@@ -23,7 +23,7 @@ useCloseSidebarOnEscape(isSidebarOpen, closeSidebar)
 provide('close-sidebar', closeSidebar)
 
 onMounted(() => {
-    const id = location.pathname.split('/').pop().replace('.html', '')
+    const id = location.pathname.replace('.html', '')
     const gitalk = new Gitalk({
       clientID: '6722bd665d1907893916',
       clientSecret: 'ab854ba77675e7fa7c38cc416feede40f2cb2159',
