@@ -8,7 +8,7 @@ module.exports = {
   title: 'TommyHu.me',
   description: 'tommyhu.me',
   // https://vitepress.vuejs.org/config/app-config#appearance
-  appearance: 'dark',
+  // appearance: 'dark',
   head: [
     [
       "meta",
