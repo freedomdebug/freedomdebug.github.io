@@ -36,7 +36,9 @@ watch(() => route.path,
   async () => {
     commidKey.value = location.pathname
     await nextTick()
-    initCommit()
+    setTimeout(() => {
+      initCommit()
+    }, 500)
   },
   {
     immediate: true
@@ -44,6 +46,7 @@ watch(() => route.path,
 );
 
 const initCommit = () => {
+    if (!document.getElementById('gitalk-container')) return
     const gitalk = new Gitalk({
       clientID: '6722bd665d1907893916',
       clientSecret: 'ab854ba77675e7fa7c38cc416feede40f2cb2159',
