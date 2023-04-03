@@ -25,9 +25,9 @@ provide('close-sidebar', closeSidebar)
 onMounted(() => {
     const id = location.pathname.split('/').pop().replace('.html', '')
     const gitalk = new Gitalk({
-      clientID: '70a7dc527b3ce3856fbc',
-      clientSecret: '81cd4af95fe835d8ef51b2993d08fece098f3eb6',
-      repo: 'freedomdebug.github.io',
+      clientID: '6722bd665d1907893916',
+      clientSecret: 'ab854ba77675e7fa7c38cc416feede40f2cb2159',
+      repo: 'tommyhume_message',
       owner: 'freedomdebug',
       admin: ['freedomdebug'],
       // number: 1,
