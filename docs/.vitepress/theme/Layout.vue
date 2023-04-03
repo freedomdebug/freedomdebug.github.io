@@ -31,19 +31,19 @@ const commidKey = ref<string>(location.pathname)
 //    initCommit()
 // })
 
-// const route = useRoute();
-// watch(() => route.path,
-//   async () => {
-//     commidKey.value = location.pathname
-//     await nextTick()
-//     setTimeout(() => {
-//       initCommit()
-//     }, 500)
-//   },
-//   {
-//     immediate: true
-//   }
-// );
+const route = useRoute();
+watch(() => route.path,
+  async () => {
+    commidKey.value = location.pathname
+    await nextTick()
+    setTimeout(() => {
+      initCommit()
+    }, 500)
+  },
+  {
+    immediate: true
+  }
+);
 
 const initCommit = () => {
     if (!document.getElementById('gitalk-container')) return
@@ -79,7 +79,7 @@ const initCommit = () => {
 
       <template #doc-before><slot name="doc-before" /></template>
       <template #doc-after><slot name="doc-after" />
-        <!-- <div id="gitalk-container"></div> -->
+        <div id="gitalk-container" :key="commidKey"></div>
       </template>
 
       <template #aside-top><slot name="aside-top" /></template>
