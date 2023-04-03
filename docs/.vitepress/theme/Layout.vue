@@ -41,7 +41,7 @@ const initCommit = () => {
       owner: 'freedomdebug',
       admin: ['freedomdebug'],
       // number: 1,
-      id: location.href,      // Ensure uniqueness and length less than 50
+      id: location.pathname,      // Ensure uniqueness and length less than 50
       distractionFreeMode: false  // Facebook-like distraction free mode
     })
 
