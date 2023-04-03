@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { provide, onMounted } from 'vue'
+import { provide, onMounted, watch } from 'vue'
+import { useRouter  } from 'vitepress'
 import { useSidebar, useCloseSidebarOnEscape } from './composables/sidebar'
 import VPSkipLink from './components/VPSkipLink.vue'
 import VPBackdrop from './components/VPBackdrop.vue'
@@ -23,7 +24,17 @@ useCloseSidebarOnEscape(isSidebarOpen, closeSidebar)
 provide('close-sidebar', closeSidebar)
 
 onMounted(() => {
-    const id = location.pathname.replace('.html', '')
+   initCommit()
+})
+
+const router = useRouter();
+watch(() => router.route.data.relativePath, (path) => {
+  console.log(path)
+  initCommit()
+});
+
+const initCommit = () => {
+   const id = location.pathname.replace('.html', '')
     const gitalk = new Gitalk({
       clientID: '6722bd665d1907893916',
       clientSecret: 'ab854ba77675e7fa7c38cc416feede40f2cb2159',
@@ -36,7 +47,7 @@ onMounted(() => {
     })
 
     gitalk.render('gitalk-container')
-})
+}
 </script>
 
 <template>
