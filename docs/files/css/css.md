@@ -202,7 +202,7 @@ methods: {
 
 ## 属性操作
 
-```
+```javascript
 // 获取容器元素
 let wrapper = document.getElementById('btnWrapper');
 // 先给容器设置一个css变量并附初始值
@@ -219,7 +219,7 @@ for (let i = 0; i < btns.length; i++) {
 ```
 
 ## 文案多行省略号显示 CSS -webkit-box-orient: vertical 属性编译后丢失问题详解
-```
+```css
 overflow: hidden;
 width: 77px;
 text-align: left;
@@ -233,7 +233,7 @@ display: -webkit-box;
 注意-webkit-box-orient: vertical;可能编译打包丢失，增加/* autoprefixer: ignore next */
 
 ## 判断文字是否有省略号
-```
+```javascript
 @click="toast($event, 'xxxxx')"
 toast(e, msg) {
     const box = e.target
@@ -248,12 +248,12 @@ toast(e, msg) {
 ```
 
 ## iphone，ios部分机型下高度塌陷
-```
+```css
 flex-shrink: 0;
 ```
 
 ## flex高度自适应
-```
+```css
 <div id="root">
   <header>
    test
@@ -310,6 +310,41 @@ flex-wrap 属性规定灵活项目是否拆行或拆列。
 
 ## 完美解决input 类型checkbox复选框不显示的问题
 > 勾选没有出现✔的样式
-```
+```css
 -webkit-appearance: checkbox
+```
+
+
+## 微信环境“关怀模式”导致H5页布局错乱问题
+* ios
+```css
+body {
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+  -moz-text-size-adjust: 100% !important;
+}
+```
+android
+```javascript
+(function () {
+  if (typeof WeixinJSBridge == 'object' && typeof window.WeixinJSBridge.invoke == 'function') {
+    handleFontSize();
+  } else {
+    if (document.addEventListener) {
+      document.addEventListener('WeixinJSBridgeReady', handleFontSize, false);
+    } else if (document.attachEvent) {
+      document.attachEvent('WeixinJSBridgeReady', handleFontSize);
+      document.attachEvent('onWeixinJSBridgeReady', handleFontSize);
+    }
+  }
+
+  function handleFontSize() {
+    // 设置网页字体为默认大小
+    window.WeixinJSBridge.invoke('setFontSizeCallback', { fontSize: 0 });
+    // 重写设置网页字体大小的事件
+    window.WeixinJSBridge.on('menu:setfont', function () {
+      window.WeixinJSBridge.invoke('setFontSizeCallback', { fontSize: 0 });
+    });
+  }
+})();
 ```
