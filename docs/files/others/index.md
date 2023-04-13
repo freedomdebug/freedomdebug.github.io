@@ -5,6 +5,7 @@
 * [多线程](/files/others/多线程)
 * [前端精准计时器](/files/others/前端精准计时器)
 * [华为荣耀手机抓包配置](/files/others/华为荣耀手机抓包配置.md)
+* [软件测试理论](/files/others/软件测试理论)
 
 
 ## 关键词
