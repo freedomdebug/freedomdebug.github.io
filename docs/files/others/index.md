@@ -1,12 +1,11 @@
 ## 最新
-* [yaml](/files/others/yaml)
-* [Multicast](/files/others/Multicast)
-* [TOML](https://toml.io/cn/)
-* [多线程](/files/others/多线程)
-* [前端精准计时器](/files/others/前端精准计时器)
+* [yaml](/files/others/yaml.md)
+* [Multicast](/files/others/Multicast.md)
+* [TOML](https://toml.io/cn/.md)
+* [多线程](/files/others/多线程.md)
+* [前端精准计时器](/files/others/前端精准计时器.md)
 * [华为荣耀手机抓包配置](/files/others/华为荣耀手机抓包配置.md)
-* [软件测试理论](/files/others/软件测试理论)
-
+* [软件测试理论](/files/others/软件测试理论.md)
 
 ## 关键词
 
