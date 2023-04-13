@@ -14,5 +14,5 @@
 ## 小tips
 * [设计思维](/files/软件设计/设计思维)
 * 《JavaScript设计模式与开发实践》网友读书笔记
-> https://github.com/freedomdebug/JS-design-pattern
-> https://github.com/freedomdebug/JavaScript-Design-Patterns
+  *  https://github.com/freedomdebug/JS-design-pattern
+  *  https://github.com/freedomdebug/JavaScript-Design-Patterns
