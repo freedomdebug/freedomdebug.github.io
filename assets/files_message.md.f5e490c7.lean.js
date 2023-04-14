@@ -1,1 +1,0 @@
-import{_ as e,c as s,o as t,b as a}from"./app.d532c150.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"files/message.md"}'),o={name:"files/message.md"},r=a("p",null,"Stay Hungry Stay Foolish\uFF01",-1),n=[r];function c(_,i,l,d,p,m){return t(),s("div",null,n)}var h=e(o,[["render",c]]);export{u as __pageData,h as default};
