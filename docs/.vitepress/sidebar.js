@@ -208,6 +208,26 @@ module.exports = [
         text: '通过babel操作AST精准插入配置代码全流程.md',
         link: '/files/pack/通过babel操作AST精准插入配置代码全流程',
       },
+      {
+        text: 'webpack.md',
+        link: '/files/pack/webpack',
+      },
+      {
+        text: 'vite.md',
+        link: '/files/pack/vite',
+      },
+      {
+        text: 'rollup.md',
+        link: '/files/pack/rollup',
+      },
+      {
+        text: 'esbuild.md',
+        link: '/files/pack/esbuild',
+      },
+      {
+        text: 'gulp.md',
+        link: '/files/pack/gulp',
+      },
     ],
   },
   {
@@ -226,6 +246,10 @@ module.exports = [
   {
     text: 'vue',
     items: [
+      {
+        text: 'index',
+        link: '/files/vue/index',
+      },
       {
         text: 'vue srr如何定位客户端和服务端不一致引发问题的dom.md',
         link: '/files/vue/vue srr如何定位客户端和服务端不一致引发问题的dom',
