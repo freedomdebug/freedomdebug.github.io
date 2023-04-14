@@ -345,6 +345,10 @@ module.exports = [
     collapsed: false,
     items: [
       {
+        text: '设计模式',
+        link: '/files/设计模式/index',
+      },
+      {
         text: '单例模式',
         link: '/files/设计模式/单例模式/单例模式',
       },
