@@ -1956,7 +1956,7 @@ interface StringArray1 {
 
 keyof也支持基本数据类型：
 
-```vbnet
+```
 let K1: keyof boolean; // let K1: "valueOf"
 let K2: keyof number; // let K2: "toString" | "toFixed" | "toExponential" | ...
 let K3: keyof symbol; // let K1: "valueOf"
