@@ -9,6 +9,10 @@ module.exports = [
       {
         text: 'Home',
         link: '/files/home',
+      },
+      {
+        text: '读书',
+        link: '/files/读书/你是人间四月天/index.md'
       }
     ]
   },
