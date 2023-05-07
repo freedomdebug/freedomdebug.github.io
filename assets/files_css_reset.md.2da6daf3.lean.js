@@ -1,1 +1,0 @@
-import{_ as s,c as n,o as a,a as l}from"./app.90cdd80d.js";const i=JSON.parse('{"title":"css reset","description":"","frontmatter":{},"headers":[],"relativePath":"files/css/reset.md"}'),p={name:"files/css/reset.md"},o=l("",2),e=[o];function c(t,D,F,r,y,C){return a(),n("div",null,e)}var B=s(p,[["render",c]]);export{i as __pageData,B as default};
