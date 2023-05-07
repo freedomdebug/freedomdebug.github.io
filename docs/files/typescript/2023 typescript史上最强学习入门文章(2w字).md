@@ -45,21 +45,21 @@
 
 ## 安装最新版typescript
 
-```js
+```javascript
 npm i -g typescript
 复制代码
 ```
 
 ## 安装ts-node
 
-```js
+```javascript
 npm i -g ts-node
 复制代码
 ```
 
 ## 创建一个 tsconfig.json 文件
 
-```js
+```javascript
 tsc --init
 复制代码
 ```
@@ -78,7 +78,7 @@ tsc --init
 
 ## JS的八种内置类型
 
-```js
+```javascript
 let str: string = "jimmy";
 let num: number = 24;
 let bool: boolean = false;
@@ -96,7 +96,7 @@ let sym: symbol = Symbol("me");
 
 默认情况下 `null` 和 `undefined` 是所有类型的子类型。 就是说你可以把 `null` 和 `undefined` 赋值给其他类型。
 
-```js
+```javascript
 // null和undefined赋值给string
 let str:string = "666";
 str = null
@@ -135,7 +135,7 @@ big= undefined
 
 虽然`number`和`bigint`都表示数字，但是这两个类型不兼容。
 
-```js
+```javascript
 let big: bigint =  100n;
 let num: number = 6;
 big = num;
@@ -151,7 +151,7 @@ num = big;
 
 对数组类型的定义有两种方式：
 
-```js
+```javascript
 let arr:string[] = ["1","2"];
 let arr2:Array<string> = ["1","2"]；
 复制代码
@@ -159,7 +159,7 @@ let arr2:Array<string> = ["1","2"]；
 
 定义联合类型数组
 
-```js
+```javascript
 let arr:(number | string)[];
 // 表示定义了一个名称叫做arr的数组, 
 // 这个数组中将来既可以存储数值类型的数据, 也可以存储字符串类型的数据
@@ -169,7 +169,7 @@ arr3 = [1, 'b', 2, 'c'];
 
 定义指定对象成员的数组：
 
-```js
+```javascript
 // interface是接口,后面会讲到
 interface Arrobj{
     name:string,
@@ -183,7 +183,7 @@ let arr3:Arrobj[]=[{name:'jimmy',age:22}]
 
 ### 函数声明
 
-```js
+```javascript
 function sum(x: number, y: number): number {
     return x + y;
 }
@@ -192,7 +192,7 @@ function sum(x: number, y: number): number {
 
 ### 函数表达式
 
-```js
+```javascript
 let mySum: (x: number, y: number) => number = function (x: number, y: number): number {
     return x + y;
 };
@@ -201,7 +201,7 @@ let mySum: (x: number, y: number) => number = function (x: number, y: number): n
 
 ### 用接口定义函数类型
 
-```js
+```javascript
 interface SearchFunc{
   (source: string, subString: string): boolean;
 }
@@ -212,7 +212,7 @@ interface SearchFunc{
 
 ### 可选参数
 
-```js
+```javascript
 function buildName(firstName: string, lastName?: string) {
     if (lastName) {
         return firstName + ' ' + lastName;
@@ -229,7 +229,7 @@ let tom = buildName('Tom');
 
 ### 参数默认值
 
-```js
+```javascript
 function buildName(firstName: string, lastName: string = 'Cat') {
     return firstName + ' ' + lastName;
 }
@@ -240,7 +240,7 @@ let tom = buildName('Tom');
 
 ### 剩余参数
 
-```js
+```javascript
 function push(array: any[], ...items: any[]) {
     items.forEach(function(item) {
         array.push(item);
@@ -255,7 +255,7 @@ push(a, 1, 2, 3);
 
 由于 JavaScript 是一个动态语言，我们通常会使用不同类型的参数来调用同一个函数，该函数会根据不同的参数而返回不同的类型的调用结果：
 
-```js
+```javascript
 function add(x, y) {
  return x + y;
 }
@@ -266,7 +266,7 @@ add("1", "2"); //"12"
 
 由于 TypeScript 是 JavaScript 的超集，因此以上的代码可以直接在 TypeScript 中使用，但当 TypeScript 编译器开启 `noImplicitAny` 的配置项时，以上代码会提示以下错误信息：
 
-```js
+```javascript
 Parameter 'x' implicitly has an 'any' type.
 Parameter 'y' implicitly has an 'any' type.
 复制代码
@@ -274,14 +274,14 @@ Parameter 'y' implicitly has an 'any' type.
 
 该信息告诉我们参数 x 和参数 y 隐式具有 `any` 类型。为了解决这个问题，我们可以为参数设置一个类型。因为我们希望 `add` 函数同时支持 string 和 number 类型，因此我们可以定义一个 `string | number` 联合类型，同时我们为该联合类型取个别名：
 
-```js
+```javascript
 type Combinable = string | number;
 复制代码
 ```
 
 在定义完 Combinable 联合类型后，我们来更新一下 `add` 函数：
 
-```js
+```javascript
 function add(a: Combinable, b: Combinable) {
     if (typeof a === 'string' || typeof b === 'string') {
      return a.toString() + b.toString();
@@ -293,7 +293,7 @@ function add(a: Combinable, b: Combinable) {
 
 为 `add` 函数的参数显式设置类型之后，之前错误的提示消息就消失了。那么此时的 `add` 函数就完美了么，我们来实际测试一下：
 
-```js
+```javascript
 const result = add('Semlinker', ' Kakuqo');
 result.split(' ');
 复制代码
@@ -301,7 +301,7 @@ result.split(' ');
 
 在上面代码中，我们分别使用 `'Semlinker'` 和 `' Kakuqo'` 这两个字符串作为参数调用 add 函数，并把调用结果保存到一个名为 `result` 的变量上，这时候我们想当然的认为此时 result 的变量的类型为 string，所以我们就可以正常调用字符串对象上的 `split` 方法。但这时 TypeScript 编译器又出现以下错误信息了：
 
-```js
+```javascript
 Property 'split' does not exist on type 'number'.
 复制代码
 ```
@@ -310,7 +310,7 @@ Property 'split' does not exist on type 'number'.
 
 > **函数重载或方法重载是使用相同名称和不同参数数量或类型创建多个方法的一种能力。** 要解决前面遇到的问题，方法就是为同一个函数提供多个函数类型定义来进行函数重载，编译器会根据这个列表去处理函数的调用。
 
-```js
+```javascript
 type Types = number | string
 function add(a:number,b:number):number;
 function add(a: string, b: string): string;
@@ -339,7 +339,7 @@ result.split(' ');
 
 元祖用于保存定长定数据类型的数据
 
-```js
+```javascript
 let x: [string, number]; 
 // 类型必须匹配且个数必须为2
 
@@ -355,7 +355,7 @@ x = [10, 'hello']; // Error
 
 我们可以通过下标的方式来访问元组中的元素，当元组中的元素较多时，这种方式并不是那么便捷。其实元组也是支持解构赋值的：
 
-```js
+```javascript
 let employee: [number, string] = [1, "Semlinker"];
 let [id, username] = employee;
 console.log(`id: ${id}`);
@@ -365,7 +365,7 @@ console.log(`username: ${username}`);
 
 以上代码成功运行后，控制台会输出以下消息：
 
-```js
+```javascript
 id: 1
 username: Semlinker
 复制代码
@@ -373,7 +373,7 @@ username: Semlinker
 
 这里需要注意的是，在解构赋值时，如果解构数组元素的个数是不能超过元组中元素的个数，否则也会出现错误，比如：
 
-```js
+```javascript
 let employee: [number, string] = [1, "Semlinker"];\
 let [id, username, age] = employee;
 复制代码
@@ -381,7 +381,7 @@ let [id, username, age] = employee;
 
 在以上代码中，我们新增了一个 age 变量，但此时 TypeScript 编译器会提示以下错误信息：
 
-```js
+```javascript
 Tuple type '[number, string]' of length '2' has no element at index '2'.
 复制代码
 ```
@@ -392,7 +392,7 @@ Tuple type '[number, string]' of length '2' has no element at index '2'.
 
 与函数签名类型，在定义元组类型时，我们也可以通过 `?` 号来声明元组类型的可选元素，具体的示例如下：
 
-```js
+```javascript
 let optionalTuple: [string, boolean?];
 optionalTuple = ["Semlinker", true];
 console.log(`optionalTuple : ${optionalTuple}`);
@@ -403,7 +403,7 @@ console.log(`optionalTuple : ${optionalTuple}`);
 
 在上面代码中，我们定义了一个名为 `optionalTuple` 的变量，该变量的类型要求包含一个必须的字符串属性和一个可选布尔属性，该代码正常运行后，控制台会输出以下内容：
 
-```js
+```javascript
 optionalTuple : Semlinker,true
 optionalTuple : Kakuqo
 复制代码
@@ -411,7 +411,7 @@ optionalTuple : Kakuqo
 
 那么在实际工作中，声明可选的元组元素有什么作用？这里我们来举一个例子，在三维坐标轴中，一个坐标点可以使用 `(x, y, z)` 的形式来表示，对于二维坐标轴来说，坐标点可以使用 `(x, y)` 的形式来表示，而对于一维坐标轴来说，只要使用 `(x)` 的形式来表示即可。针对这种情形，在 TypeScript 中就可以利用元组类型可选元素的特性来定义一个元组类型的坐标点，具体实现如下：
 
-```js
+```javascript
 type Point = [number, number?, number?];
 
 const x: Point = [10]; // 一维坐标点
@@ -428,7 +428,7 @@ console.log(xyz.length); // 3
 
 元组类型里最后一个元素可以是剩余元素，形式为 `...X`，这里 `X` 是数组类型。**剩余元素代表元组类型是开放的，可以有零个或多个额外的元素。** 例如，`[number, ...string[]]` 表示带有一个 `number` 元素和任意数量`string` 类型元素的元组类型。为了能更好的理解，我们来举个具体的例子：
 
-```js
+```javascript
 type RestTupleType = [number, ...string[]];
 let restTuple: RestTupleType = [666, "Semlinker", "Kakuqo", "Lolo"];
 console.log(restTuple[0]);
@@ -440,14 +440,14 @@ console.log(restTuple[1]);
 
 TypeScript 3.4 还引入了对只读元组的新支持。我们可以为任何元组类型加上 `readonly` 关键字前缀，以使其成为只读元组。具体的示例如下：
 
-```js
+```javascript
 const point: readonly [number, number] = [10, 20];
 复制代码
 ```
 
 在使用 `readonly` 关键字修饰元组类型之后，任何企图修改元组中元素的操作都会抛出异常：
 
-```js
+```javascript
 // Cannot assign to '0' because it is a read-only property.
 point[0] = 1;
 // Property 'push' does not exist on type 'readonly [number, number]'.
@@ -463,7 +463,7 @@ point.splice(1, 1);
 
 `void`表示没有任何类型，和其他类型是平等关系，不能直接赋值:
 
-```js
+```javascript
 let a: void; 
 let b: number = a; // Error
 复制代码
@@ -473,7 +473,7 @@ let b: number = a; // Error
 
 值得注意的是，方法没有返回值将得到`undefined`，但是我们需要定义成`void`类型，而不是`undefined`类型。否则将报错:
 
-```js
+```javascript
 function fun(): undefined {
   console.log("this is TypeScript");
 };
@@ -490,7 +490,7 @@ fun(); // Error
 1. 如果一个函数执行时抛出了**异常**，那么这个函数永远不存在返回值（因为抛出异常会直接中断程序运行，这使得程序运行不到返回值那一步，即具有不可达的终点，也就永不存在返回了）；
 2. 函数中执行无限循环的代码（**死循环**），使得程序永远无法运行到函数返回值那一步，永不存在返回。
 
-```js
+```javascript
 // 异常
 function err(msg: string): never { // OK
   throw new Error(msg); 
@@ -508,7 +508,7 @@ function loopForever(): never { // OK
 
 但是没有类型是`never`的子类型或可以赋值给`never`类型（除了`never`本身之外），即使`any`也不可以赋值给`never`
 
-```js
+```javascript
 let ne: never;
 let nev: never;
 let an: any;
@@ -523,7 +523,7 @@ ne = (() => { while(true) {} })(); // OK
 
 在 TypeScript 中，可以利用 never 类型的特性来实现全面性检查，具体示例如下：
 
-```js
+```javascript
 type Foo = string | number;
 
 function controlFlowAnalysisWithNever(foo: Foo) {
@@ -541,7 +541,7 @@ function controlFlowAnalysisWithNever(foo: Foo) {
 
 注意在 else 分支里面，我们把收窄为 never 的 foo 赋值给一个显示声明的 never 变量。如果一切逻辑正确，那么这里应该能够编译通过。但是假如后来有一天你的同事修改了 Foo 的类型：
 
-```js
+```javascript
 type Foo = string | number | boolean;
 复制代码
 ```
@@ -554,7 +554,7 @@ type Foo = string | number | boolean;
 
 如果是一个普通类型，在赋值过程中改变类型是不被允许的：
 
-```js
+```javascript
 let a: string = 'seven';
 a = 7;
 // TS2322: Type 'number' is not assignable to type 'string'.
@@ -563,7 +563,7 @@ a = 7;
 
 但如果是 `any` 类型，则允许被赋值为任意类型。
 
-```js
+```javascript
 let a: any = 666;
 a = "Semlinker";
 a = false;
@@ -577,7 +577,7 @@ a = {}
 
 在any上访问任何属性都是允许的,也允许调用任何方法.
 
-```js
+```javascript
 let anyThing: any = 'hello';
 console.log(anyThing.myName);
 console.log(anyThing.myName.firstName);
@@ -590,7 +590,7 @@ anyThing.myName.setFirstName('Cat');
 
 **变量如果在声明的时候，未指定其类型，那么它会被识别为任意值类型**：
 
-```js
+```javascript
 let something;
 something = 'seven';
 something = 7;
@@ -600,7 +600,7 @@ something.setName('Tom');
 
 等价于
 
-```js
+```javascript
 let something: any;
 something = 'seven';
 something = 7;
@@ -616,7 +616,7 @@ something.setName('Tom');
 
 `unknown`与`any`一样，所有类型都可以分配给`unknown`:
 
-```js
+```javascript
 let notSure: unknown = 4;
 notSure = "maybe a string instead"; // OK
 notSure = false; // OK
@@ -636,7 +636,7 @@ let uncertain: number = notSure; // Error
 
 如果不缩小类型，就无法对`unknown`类型执行任何操作：
 
-```js
+```javascript
 function getDog() {
  return '123'
 }
@@ -648,7 +648,7 @@ dog.hello(); // Error
 
 这种机制起到了很强的预防性，更安全，这就要求我们必须缩小类型，我们可以使用`typeof`、`类型断言`等方式来缩小未知范围：
 
-```js
+```javascript
 function getDogName() {
  let x: unknown;
  return x;
@@ -673,7 +673,7 @@ const upName = (dogName as string).toLowerCase(); // OK
 
 下面我们看一个具体的示例：
 
-```js
+```javascript
 let num: number;
 let Num: Number;
 Num = num; // ok
@@ -695,7 +695,7 @@ num = Num; // ts(2322)报错
 
 下面我们看一个具体示例：
 
-```js
+```javascript
 let lowerCaseObject: object;
 lowerCaseObject = 1; // ts(2322)
 lowerCaseObject = 'a'; // ts(2322)
@@ -712,7 +712,7 @@ lowerCaseObject = {}; // ok
 
 下面我们也看一个具体的示例：
 
-```js
+```javascript
 let upperCaseObject: Object;
 upperCaseObject = 1; // ok
 upperCaseObject = 'a'; // ok
@@ -729,7 +729,7 @@ upperCaseObject = {}; // ok
 
 下面我们还是通过一个具体的示例进行说明。
 
-```js
+```javascript
 type isLowerCaseObjectExtendsUpperCaseObject = object extends Object ? true : false; // true
 type isUpperCaseObjectExtendsLowerCaseObject = Object extends object ? true : false; // true
 upperCaseObject = lowerCaseObject; // ok
@@ -744,7 +744,7 @@ lowerCaseObject = upperCaseObject; // ok
 
 {}空对象类型和大 Object 一样，也是表示原始类型和非原始类型的集合，并且在严格模式下，null 和 undefined 也不能赋给 {} ，如下示例：
 
-```js
+```javascript
 let ObjectLiteral: {};
 ObjectLiteral = 1; // ok
 ObjectLiteral = 'a'; // ok
@@ -765,7 +765,7 @@ ObjectLiteral = upperCaseObject;
 
 # 类型推断
 
-```js
+```javascript
 {
   let str: string = 'this is string';
   let num: number = 1;
@@ -785,7 +785,7 @@ ObjectLiteral = upperCaseObject;
 
 在很多情况下，TypeScript 会根据上下文环境自动推断出变量的类型，无须我们再写明类型注解。因此，上面的示例可以简化为如下所示内容：
 
-```js
+```javascript
 {
   let str = 'this is string'; // 等价 let str: string = 'this is string'; 下面类似
   let num = 1; // 等价
@@ -803,7 +803,7 @@ ObjectLiteral = upperCaseObject;
 
 在 TypeScript 中，具有初始化值的变量、有默认值的函数参数、函数返回的类型都可以根据上下文推断出来。比如我们能根据 return 语句推断函数返回的类型，如下代码所示：
 
-```js
+```javascript
 {
   /** 根据参数的类型，推断出返回值的类型也是 number */
   function add1(a: number, b: number) {
@@ -823,7 +823,7 @@ ObjectLiteral = upperCaseObject;
 
 如果定义的时候没有赋值，不管之后有没有赋值，都会被推断成 `any` 类型而完全不被类型检查：
 
-```js
+```javascript
 let myFavoriteNumber;
 myFavoriteNumber = 'seven';
 myFavoriteNumber = 7;
@@ -838,7 +838,7 @@ myFavoriteNumber = 7;
 
 TypeScript 类型检测无法做到绝对智能，毕竟程序不能像人一样思考。有时会碰到我们比 TypeScript 更清楚实际类型的情况，比如下面的例子：
 
-```js
+```javascript
 const arrayNumber: number[] = [1, 2, 3, 4];
 const greaterThan2: number = arrayNumber.find(num => num > 2); // 提示 ts(2322)
 复制代码
@@ -852,7 +852,7 @@ const greaterThan2: number = arrayNumber.find(num => num > 2); // 提示 ts(2322
 
 比如，我们可以使用 as 语法做类型断言，如下代码所示：
 
-```js
+```javascript
 const arrayNumber: number[] = [1, 2, 3, 4];
 const greaterThan2: number = arrayNumber.find(num => num > 2) as number;
 复制代码
@@ -860,7 +860,7 @@ const greaterThan2: number = arrayNumber.find(num => num > 2) as number;
 
 ## 语法
 
-```js
+```javascript
 // 尖括号 语法
 let someValue: any = "this is a string";
 let strLength: number = (<string>someValue).length;
@@ -879,7 +879,7 @@ let strLength: number = (someValue as string).length;
 
 具体看以下示例：
 
-```js
+```javascript
 let mayNullOrUndefinedOrString: null | undefined | string;
 mayNullOrUndefinedOrString!.toString(); // ok
 mayNullOrUndefinedOrString.toString(); // ts(2531)
@@ -899,7 +899,7 @@ function myFunc(numGenerator: NumGenerator | undefined) {
 
 允许在实例属性和变量声明后面放置一个 `!` 号，从而告诉 TypeScript 该属性会被明确地赋值。为了更好地理解它的作用，我们来看个具体的例子：
 
-```js
+```javascript
 let x: number;
 initialize();
 
@@ -914,7 +914,7 @@ function initialize() {
 
 很明显该异常信息是说变量 x 在赋值前被使用了，要解决该问题，我们可以使用确定赋值断言：
 
-```js
+```javascript
 let x!: number;
 initialize();
 console.log(2 * x); // Ok
@@ -933,7 +933,7 @@ function initialize() {
 
 目前，TypeScript 支持 3 种字面量类型：字符串字面量类型、数字字面量类型、布尔字面量类型，对应的字符串字面量、数字字面量、布尔字面量分别拥有与其值一样的字面量类型，具体示例如下：
 
-```js
+```javascript
 {
   let specifiedStr: 'this is string' = 'this is string';
   let specifiedNum: 1 = 1;
@@ -944,7 +944,7 @@ function initialize() {
 
 比如 'this is string' （这里表示一个字符串字面量类型）类型是 string 类型（确切地说是 string 类型的子类型），而 string 类型不一定是 'this is string'（这里表示一个字符串字面量类型）类型，如下具体示例：
 
-```js
+```javascript
 {
   let specifiedStr: 'this is string' = 'this is string';
   let str: string = 'any string';
@@ -960,7 +960,7 @@ function initialize() {
 
 一般来说，我们可以使用一个字符串字面量类型作为变量的类型，如下代码所示：
 
-```js
+```javascript
 let hello: 'hello' = 'hello';
 hello = 'hi'; // ts(2322) Type '"hi"' is not assignable to type '"hello"'
 复制代码
@@ -970,7 +970,7 @@ hello = 'hi'; // ts(2322) Type '"hi"' is not assignable to type '"hello"'
 
 如下代码所示，我们使用字面量联合类型描述了一个明确、可 'up' 可 'down' 的集合，这样就能清楚地知道需要的数据结构了。
 
-```js
+```javascript
 type Direction = 'up' | 'down';
 
 function move(dir: Direction) {
@@ -990,7 +990,7 @@ move('right'); // ts(2345) Argument of type '"right"' is not assignable to param
 
 数字字面量类型和布尔字面量类型的使用与字符串字面量类型的使用类似，我们可以使用字面量组合的联合类型将函数的参数限定为更具体的类型，比如声明如下所示的一个类型 Config：
 
-```js
+```javascript
 interface Config {
     size: 'small' | 'big';
     isEnable:  true | false;
@@ -1005,7 +1005,7 @@ interface Config {
 
 我们先来看一个 const 示例，如下代码所示：
 
-```js
+```javascript
 {
   const str = 'this is string'; // str: 'this is string'
   const num = 1; // num: 1
@@ -1018,7 +1018,7 @@ interface Config {
 
 接下来我们看看如下所示的 let 示例:
 
-```js
+```javascript
 {
 
   let str = 'this is string'; // str: string
@@ -1032,7 +1032,7 @@ interface Config {
 
 这种设计符合编程预期，意味着我们可以分别赋予 str 和 num 任意值（只要类型是 string 和 number 的子集的变量）：
 
-```js
+```javascript
   str = 'any string';
   num = 2;
   bool = false;
@@ -1047,7 +1047,7 @@ interface Config {
 
 下面我们通过字符串字面量的示例来理解一下字面量类型拓宽：
 
-```js
+```javascript
   let str = 'this is string'; // 类型是 string
   let strFun = (str = 'this is string') => str; // 类型是 (str?: string) => string;
   const specifiedStr = 'this is string'; // 类型是 'this is string'
@@ -1064,7 +1064,7 @@ interface Config {
 
 基于字面量类型拓宽的条件，我们可以通过如下所示代码添加显示类型注解控制类型拓宽行为。
 
-```js
+```javascript
 {
   const specifiedStr: 'this is string' = 'this is string'; // 类型是 '"this is string"'
   let str2 = specifiedStr; // 即便使用 let 定义，类型是 'this is string'
@@ -1076,7 +1076,7 @@ interface Config {
 
 比如对 null 和 undefined 的类型进行拓宽，通过 let、var 定义的变量如果满足未显式声明类型注解且被赋予了 null 或 undefined 值，则推断出这些变量的类型是 any：
 
-```js
+```javascript
 {
   let x = null; // 类型拓宽成 any
   let y = undefined; // 类型拓宽成 any
@@ -1100,7 +1100,7 @@ interface Config {
 
 假设你正在编写一个向量库，你首先定义了一个 Vector3 接口，然后定义了 getComponent 函数用于获取指定坐标轴的值：
 
-```js
+```javascript
 interface Vector3 {
   x: number;
   y: number;
@@ -1115,7 +1115,7 @@ function getComponent(vector: Vector3, axis: "x" | "y" | "z") {
 
 但是，当你尝试使用 getComponent 函数时，TypeScript 会提示以下错误信息：
 
-```js
+```javascript
 let x = "x";
 let vec = { x: 10, y: 20, z: 30 };
 // 类型“string”的参数不能赋给类型“"x" | "y" | "z"”的参数。
@@ -1127,7 +1127,7 @@ getComponent(vec, x); // Error
 
 这个过程是复杂的，因为对于任何给定的值都有许多可能的类型。例如：
 
-```js
+```javascript
 const arr = ['x', 1];
 复制代码
 ```
@@ -1147,7 +1147,7 @@ const arr = ['x', 1];
 
 在下面的例子中，变量 x 的类型被推断为字符串，因为 TypeScript 允许这样的代码：
 
-```js
+```javascript
 let x = 'semlinker';
 x = 'kakuqo';
 x = 'lolo';
@@ -1156,7 +1156,7 @@ x = 'lolo';
 
 对于 JavaScript 来说，以下代码也是合法的：
 
-```js
+```javascript
 let x = 'x';
 x = /x|y|z/;
 x = ['x', 'y', 'z'];
@@ -1167,7 +1167,7 @@ x = ['x', 'y', 'z'];
 
 TypeScript 提供了一些控制拓宽过程的方法。其中一种方法是使用 `const`。如果用 const 而不是 let 声明一个变量，那么它的类型会更窄。事实上，使用 const 可以帮助我们修复前面例子中的错误：
 
-```js
+```javascript
 const x = "x"; // type is "x" 
 let vec = { x: 10, y: 20, z: 30 };
 getComponent(vec, x); // OK
@@ -1180,7 +1180,7 @@ getComponent(vec, x); // OK
 
 以下这段代码在 JavaScript 中是没有问题的：
 
-```js
+```javascript
 const obj = { 
   x: 1,
 }; 
@@ -1197,7 +1197,7 @@ obj.name = 'semlinker';
 
 因此最后三行的语句会出现错误：
 
-```js
+```javascript
 const obj = { 
   x: 1,
 };
@@ -1218,7 +1218,7 @@ obj.name = 'semlinker'; // Error
 
 TypeScript 试图在具体性和灵活性之间取得平衡。它需要推断一个足够具体的类型来捕获错误，但又不能推断出错误的类型。它通过属性的初始化值来推断属性的类型，当然有几种方法可以覆盖 TypeScript 的默认行为。一种是提供显式类型注释：
 
-```js
+```javascript
 // Type is { x: 1 | 3 | 5; }
 const obj: { x: 1 | 3 | 5 } = {
   x: 1 
@@ -1228,7 +1228,7 @@ const obj: { x: 1 | 3 | 5 } = {
 
 另一种方法是使用 const 断言。不要将其与 let 和 const 混淆，后者在值空间中引入符号。这是一个纯粹的类型级构造。让我们来看看以下变量的不同推断类型：
 
-```js
+```javascript
 // Type is { x: number; y: number; }
 const obj1 = { 
   x: 1, 
@@ -1251,7 +1251,7 @@ const obj3 = {
 
 当你在一个值之后使用 const 断言时，TypeScript 将为它推断出最窄的类型，没有拓宽。对于真正的常量，这通常是你想要的。当然你也可以对数组使用 const 断言：
 
-```js
+```javascript
 // Type is number[]
 const arr1 = [1, 2, 3]; 
 
@@ -1268,7 +1268,7 @@ const arr2 = [1, 2, 3] as const;
 
 比如，我们可以使用类型守卫（后面会讲到）将函数参数的类型从 any 缩小到明确的类型，具体示例如下：
 
-```js
+```javascript
 {
   let func = (anything: any) => {
     if (typeof anything === 'string') {
@@ -1286,7 +1286,7 @@ const arr2 = [1, 2, 3] as const;
 
 同样，我们可以使用类型守卫将联合类型缩小到明确的子类型，具体示例如下：
 
-```js
+```javascript
 {
   let func = (anything: string | number) => {
     if (typeof anything === 'string') {
@@ -1301,7 +1301,7 @@ const arr2 = [1, 2, 3] as const;
 
 当然，我们也可以通过字面量类型等值判断（===）或其他控制流语句（包括但不限于 if、三目运算符、switch 分支）将联合类型收敛为更具体的类型，如下代码所示：
 
-```js
+```javascript
 {
   type Goods = 'pen' | 'pencil' |'ruler';
   const getPenCost = (item: 'pen') => 2;
@@ -1326,7 +1326,7 @@ const arr2 = [1, 2, 3] as const;
 
 事实上，如果我们将上面的示例去掉中间的流程分支，编译器也可以推断出收敛后的类型，如下代码所示：
 
-```js
+```javascript
   const getCost = (item: Goods) =>  {
     if (item === 'pen') {
       item; // item => 'pen'
@@ -1339,7 +1339,7 @@ const arr2 = [1, 2, 3] as const;
 
 一般来说 `TypeScript` 非常擅长通过条件来判别类型，但在处理一些特殊值时要特别注意 —— 它可能包含你不想要的东西！例如，以下从联合类型中排除 null 的方法是错误的：
 
-```js
+```javascript
 const el = document.getElementById("foo"); // Type is HTMLElement | null
 if (typeof el === "object") {
   el; // Type is HTMLElement | null
@@ -1349,7 +1349,7 @@ if (typeof el === "object") {
 
 因为在 JavaScript 中 `typeof null` 的结果是 "object" ，所以你实际上并没有通过这种检查排除 `null` 值。除此之外，falsy 的原始值也会产生类似的问题：
 
-```js
+```javascript
 function foo(x?: number | string | null) {
   if (!x) {
     x; // Type is string | number | null | undefined\
@@ -1360,7 +1360,7 @@ function foo(x?: number | string | null) {
 
 因为空字符串和 0 都属于 falsy 值，所以在分支中 x 的类型可能是 string 或 number 类型。帮助类型检查器缩小类型的另一种常见方法是在它们上放置一个明确的 “标签”：
 
-```js
+```javascript
 interface UploadEvent {
   type: "upload";
   filename: string;
@@ -1393,7 +1393,7 @@ function handleEvent(e: AppEvent) {
 
 联合类型表示取值可以为多种类型中的一种，使用 `|` 分隔每个类型。
 
-```js
+```javascript
 let myFavoriteNumber: string | number;
 myFavoriteNumber = 'seven'; // OK
 myFavoriteNumber = 7; // OK
@@ -1402,7 +1402,7 @@ myFavoriteNumber = 7; // OK
 
 联合类型通常与 `null` 或 `undefined` 一起使用：
 
-```js
+```javascript
 const sayHello = (name: string | undefined) => {
   /* ... */
 };
@@ -1411,7 +1411,7 @@ const sayHello = (name: string | undefined) => {
 
 例如，这里 `name` 的类型是 `string | undefined` 意味着可以将 `string` 或 `undefined` 的值传递给`sayHello` 函数。
 
-```js
+```javascript
 sayHello("semlinker"); 
 sayHello(undefined);
 复制代码
@@ -1419,7 +1419,7 @@ sayHello(undefined);
 
 通过这个示例，你可以凭直觉知道类型 A 和类型 B 联合后的类型是同时接受 A 和 B 值的类型。此外，对于联合类型来说，你可能会遇到以下的用法：
 
-```js
+```javascript
 let num: 1 | 2 = 1;
 type EventNames = 'click' | 'scroll' | 'mousemove';
 复制代码
@@ -1431,7 +1431,7 @@ type EventNames = 'click' | 'scroll' | 'mousemove';
 
 类型别名用来给一个类型起个新名字。类型别名常用于联合类型。
 
-```js
+```javascript
 type Message = string | string[];
 let greet = (message: Message) => {
   // ...
@@ -1445,7 +1445,7 @@ let greet = (message: Message) => {
 
 交叉类型是将多个类型合并为一个类型。 这让我们可以把现有的多种类型叠加到一起成为一种类型，它包含了所需的所有类型的特性，使用`&`定义交叉类型。
 
-```js
+```javascript
 {
   type Useless = string & number;
 }
@@ -1456,7 +1456,7 @@ let greet = (message: Message) => {
 
 交叉类型真正的用武之地就是将多个接口类型合并成一个类型，从而实现等同接口继承的效果，也就是所谓的合并接口类型，如下代码所示：
 
-```js
+```javascript
   type IntersectionType = { id: number; name: string; } & { age: number };
   const mixed: IntersectionType = {
     id: 1,
@@ -1474,7 +1474,7 @@ let greet = (message: Message) => {
 
 如果同名属性的类型不兼容，比如上面示例中两个接口类型同名的 name 属性类型一个是 number，另一个是 string，合并后，name 属性的类型就是 number 和 string 两个原子类型的交叉类型，即 never，如下代码所示：
 
-```js
+```javascript
   type IntersectionTypeConfict = { id: number; name: string; } 
   & { age: number; name: number; };
   const mixedConflict: IntersectionTypeConfict = {
@@ -1491,7 +1491,7 @@ let greet = (message: Message) => {
 
 如下所示示例中 name 属性的类型就是数字字面量类型 2，因此，我们不能把任何非 2 之外的值赋予 name 属性。
 
-```js
+```javascript
   type IntersectionTypeConfict = { id: number; name: 2; } 
   & { age: number; name: number; };
 
@@ -1510,7 +1510,7 @@ let greet = (message: Message) => {
 
 那么如果同名属性是非基本数据类型的话，又会是什么情形。我们来看个具体的例子：
 
-```js
+```javascript
 interface A {
   x:{d:true},
 }
@@ -1549,7 +1549,7 @@ TypeScript 中的接口是一个非常灵活的概念，除了可用于[对类�
 
 ## 简单的例子
 
-```js
+```javascript
 interface Person {
     name: string;
     age: number;
@@ -1567,7 +1567,7 @@ let tom: Person = {
 
 定义的变量比接口少了一些属性是不允许的：
 
-```js
+```javascript
 interface Person {
     name: string;
     age: number;
@@ -1583,7 +1583,7 @@ let tom: Person = {
 
 多一些属性也是不允许的：
 
-```js
+```javascript
 interface Person {
     name: string;
     age: number;
@@ -1604,7 +1604,7 @@ let tom: Person = {
 
 ## 可选 | 只读属性
 
-```js
+```javascript
 interface Person {
   readonly name: string;
   age?: number;
@@ -1614,7 +1614,7 @@ interface Person {
 
 只读属性用于限制只能在对象刚刚创建的时候修改其值。此外 TypeScript 还提供了 `ReadonlyArray<T>` 类型，它与 `Array<T>` 相似，只是把所有可变方法去掉了，因此可以确保数组创建后再也不能被修改。
 
-```js
+```javascript
 let a: number[] = [1, 2, 3, 4];
 let ro: ReadonlyArray<number> = a;
 ro[0] = 12; // error!
@@ -1628,7 +1628,7 @@ a = ro; // error!
 
 有时候我们希望一个接口中除了包含必选和可选属性之外，还允许有其他的任意属性，这时我们可以使用 **索引签名** 的形式来满足上述要求。
 
-```js
+```javascript
 interface Person {
     name: string;
     age?: number;
@@ -1644,7 +1644,7 @@ let tom: Person = {
 
 需要注意的是，**一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集**
 
-```js
+```javascript
 interface Person {
     name: string;
     age?: number;
@@ -1671,7 +1671,7 @@ let tom: Person = {
 
 一个接口中只能定义一个任意属性。如果接口中有多个类型的属性，则可以在任意属性中使用联合类型：
 
-```js
+```javascript
 interface Person {
     name: string;
     age?: number; // 这里真实的类型应该为：number | undefined
@@ -1692,7 +1692,7 @@ let tom: Person = {
 
 ### 例子
 
-```js
+```javascript
 interface LabeledValue {
   label: string;
 }
@@ -1724,7 +1724,7 @@ printLabel({ size: 10, label: "Size 10 Object" }); // Error
 
 类型断言的意义就等同于你在告诉程序，你很清楚自己在做什么，此时程序自然就不会再进行额外的属性检查了。
 
-```js
+```javascript
 interface Props { 
   name: string; 
   age: number; 
@@ -1742,7 +1742,7 @@ let p: Props = {
 
 ### 索引签名
 
-```js
+```javascript
 interface Props { 
   name: string; 
   age: number; 
@@ -1773,7 +1773,7 @@ let p: Props = {
 
 **Interface**
 
-```js
+```javascript
 interface Point {
   x: number;
   y: number;
@@ -1788,7 +1788,7 @@ interface SetPoint {
 
 **Type alias**
 
-```js
+```javascript
 type Point = {
   x: number;
   y: number;
@@ -1803,7 +1803,7 @@ type SetPoint = (x: number, y: number) => void;
 
 与接口不同，类型别名还可以用于其他类型，如基本类型（原始值）、联合类型、元组。
 
-```js
+```javascript
 // primitive
 type Name = string;
 
@@ -1827,7 +1827,7 @@ type B = typeof div;
 
 与类型别名不同，接口可以定义多次，会被自动合并为单个接口。
 
-```js
+```javascript
 interface Point { x: number; }
 interface Point { y: number; }
 const point: Point = { x: 1, y: 2 };
@@ -1842,7 +1842,7 @@ const point: Point = { x: 1, y: 2 };
 
 ### 接口扩展接口
 
-```js
+```javascript
 interface PointX {
     x: number
 }
@@ -1855,7 +1855,7 @@ interface Point extends PointX {
 
 ### 类型别名扩展类型别名
 
-```js
+```javascript
 type PointX = {
     x: number
 }
@@ -1868,7 +1868,7 @@ type Point = PointX & {
 
 ### 接口扩展类型别名
 
-```js
+```javascript
 type PointX = {
     x: number
 }
@@ -1880,7 +1880,7 @@ interface Point extends PointX {
 
 ### 类型别名扩展接口
 
-```js
+```javascript
 interface PointX {
     x: number
 }
@@ -1898,14 +1898,14 @@ type Point = PointX & {
 
 你会觉得这很简单，顺手就写出这样的代码：
 
-```js
+```javascript
 const identity = (arg) => arg;
 复制代码
 ```
 
 由于其可以接受任意值，也就是说你的函数的入参和返回值都应该可以是任意类型。 现在让我们给代码增加类型声明：
 
-```js
+```javascript
 type idBoolean = (arg: boolean) => boolean;
 type idNumber = (arg: number) => number;
 type idString = (arg: string) => string;
@@ -1915,7 +1915,7 @@ type idString = (arg: string) => string;
 
 一个笨的方法就像上面那样，也就是说 JS 提供多少种类型，就需要复制多少份代码，然后改下类型签名。这对程序员来说是致命的。这种复制粘贴增加了出错的概率，使得代码难以维护，牵一发而动全身。并且将来 JS 新增新的类型，你仍然需要修改代码，也就是说你的代码**对修改开放**，这样不好。还有一种方式是使用 any 这种“万能语法”。缺点是什么呢？我举个例子：
 
-```js
+```javascript
 identity("string").length; // ok
 identity("string").toFixed(2); // ok
 identity(null).toString(); // ok
@@ -1927,7 +1927,7 @@ identity(null).toString(); // ok
 
 为了解决上面的这些问题，我们**使用泛型对上面的代码进行重构**。和我们的定义不同，这里用了一个 类型 T，这个 **T 是一个抽象类型，只有在调用的时候才确定它的值**，这就不用我们复制粘贴无数份代码了。
 
-```js
+```javascript
 function identity<T>(arg: T): T {
   return arg;
 }
@@ -1944,7 +1944,7 @@ function identity<T>(arg: T): T {
 
 其实并不是只能定义一个类型变量，我们可以引入希望定义的任何数量的类型变量。比如我们引入一个新的类型变量 `U`，用于扩展我们定义的 `identity` 函数：
 
-```js
+```javascript
 function identity <T, U>(value: T, message: U) : T {
   console.log(message);
   return value;
@@ -1957,7 +1957,7 @@ console.log(identity<Number, string>(68, "Semlinker"));
 
 除了为类型变量显式设定值之外，一种更常见的做法是使编译器自动选择这些类型，从而使代码更简洁。我们可以完全省略尖括号，比如：
 
-```js
+```javascript
 function identity <T, U>(value: T, message: U) : T {
   console.log(message);
   return value;
@@ -1972,7 +1972,7 @@ console.log(identity(68, "Semlinker"));
 
 假如我想打印出参数的 size 属性呢？如果完全不进行约束 TS 是会报错的：
 
-```js
+```javascript
 function trace<T>(arg: T): T {
   console.log(arg.size); // Error: Property 'size doesn't exist on type 'T'
   return arg;
@@ -1982,7 +1982,7 @@ function trace<T>(arg: T): T {
 
 报错的原因在于 T 理论上是可以是任何类型的，不同于 any，你不管使用它的什么属性或者方法都会报错（除非这个属性和方法是所有集合共有的）。那么直观的想法是限定传给 trace 函数的**参数类型**应该有 size 类型，这样就不会报错了。如何去表达这个**类型约束**的点呢？实现这个需求的关键在于使用类型约束。 使用 extends 关键字可以做到这一点。简单来说就是你定义一个类型，然后让 T 实现这个接口即可。
 
-```js
+```javascript
 interface Sizeable {
   size: number;
 }
@@ -2003,7 +2003,7 @@ function trace<T extends Sizeable>(arg: T): T {
 
 typeof 的主要用途是在类型上下文中获取变量或者属性的类型，下面我们通过一个具体示例来理解一下。
 
-```js
+```javascript
 interface Person {
   name: string;
   age: number;
@@ -2015,14 +2015,14 @@ type Sem = typeof sem; // type Sem = Person
 
 在上面代码中，我们通过 `typeof` 操作符获取 sem 变量的类型并赋值给 Sem 类型变量，之后我们就可以使用 Sem 类型：
 
-```js
+```javascript
 const lolo: Sem = { name: "lolo", age: 5 }
 复制代码
 ```
 
 你也可以对嵌套对象执行相同的操作：
 
-```js
+```javascript
 const Message = {
     name: "jimmy",
     age: 18,
@@ -2047,7 +2047,7 @@ type message = typeof Message;
 
 此外，`typeof` 操作符除了可以获取对象的结构类型之外，它也可以用来获取函数对象的类型，比如：
 
-```js
+```javascript
 function toArray(x: number): Array<number> {
   return [x];
 }
@@ -2059,7 +2059,7 @@ type Func = typeof toArray; // -> (x: number) => number[]
 
 `keyof` 操作符是在 TypeScript 2.1 版本引入的，该操作符可以用于获取某种类型的所有键，其返回类型是联合类型。
 
-```js
+```javascript
 interface Person {
   name: string;
   age: number;
@@ -2073,7 +2073,7 @@ type K3 = keyof { [x: string]: Person };  // string | number
 
 在 TypeScript 中支持两种索引签名，数字索引和字符串索引：
 
-```js
+```javascript
 interface StringArray {
   // 字符串索引 -> keyof StringArray => string | number
   [index: string]: string; 
@@ -2101,7 +2101,7 @@ let K3: keyof symbol; // let K1: "valueOf"
 
 JavaScript 是一种高度动态的语言。有时在静态类型系统中捕获某些操作的语义可能会很棘手。以一个简单的`prop` 函数为例：
 
-```js
+```javascript
 function prop(obj, key) {
   return obj[key];
 }
@@ -2112,7 +2112,7 @@ function prop(obj, key) {
 
 那么在 TypeScript 中如何定义上面的 `prop` 函数呢？我们来尝试一下：
 
-```js
+```javascript
 function prop(obj: object, key: string) {
   return obj[key];
 }
@@ -2121,14 +2121,14 @@ function prop(obj: object, key: string) {
 
 在上面代码中，为了避免调用 prop 函数时传入错误的参数类型，我们为 obj 和 key 参数设置了类型，分别为 `{}` 和 `string` 类型。然而，事情并没有那么简单。针对上述的代码，TypeScript 编译器会输出以下错误信息：
 
-```js
+```javascript
 Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
 复制代码
 ```
 
 元素隐式地拥有 `any` 类型，因为 `string` 类型不能被用于索引 `{}` 类型。要解决这个问题，你可以使用以下非常暴力的方案：
 
-```js
+```javascript
 function prop(obj: object, key: string) {
   return (obj as any)[key];
 }
@@ -2137,7 +2137,7 @@ function prop(obj: object, key: string) {
 
 很明显该方案并不是一个好的方案，我们来回顾一下 `prop` 函数的作用，该函数用于获取某个对象中指定属性的属性值。因此我们期望用户输入的属性是对象上已存在的属性，那么如何限制属性名的范围呢？这时我们可以利用本文的主角 `keyof` 操作符：
 
-```js
+```javascript
 function prop<T extends object, K extends keyof T>(obj: T, key: K) {
   return obj[key];
 }
@@ -2146,7 +2146,7 @@ function prop<T extends object, K extends keyof T>(obj: T, key: K) {
 
 在以上代码中，我们使用了 TypeScript 的泛型和泛型约束。**首先定义了 T 类型并使用 `extends` 关键字约束该类型必须是 object 类型的子类型，然后使用 `keyof` 操作符获取 T 类型的所有键，其返回类型是联合类型，最后利用 `extends` 关键字约束 K 类型必须为 `keyof T` 联合类型的子类型。**  是骡子是马拉出来遛遛就知道了，我们来实际测试一下：
 
-```js
+```javascript
 type Todo = {
   id: number;
   text: string;
@@ -2171,14 +2171,14 @@ const done = prop(todo, "done"); // const done: boolean
 
 很明显使用泛型，重新定义后的 `prop<T extends object, K extends keyof T>(obj: T, key: K)` 函数，已经可以正确地推导出指定键对应的类型。那么当访问 todo 对象上不存在的属性时，会出现什么情况？比如：
 
-```js
+```javascript
 const date = prop(todo, "date");
 复制代码
 ```
 
 对于上述代码，TypeScript 编译器会提示以下错误：
 
-```js
+```javascript
 Argument of type '"date"' is not assignable to parameter of type '"id" | "text" | "done"'.
 复制代码
 ```
@@ -2189,7 +2189,7 @@ Argument of type '"date"' is not assignable to parameter of type '"id" | "text" 
 
 `in` 用来遍历枚举类型：
 
-```js
+```javascript
 type Keys = "a" | "b" | "c"
 
 type Obj =  {
@@ -2202,7 +2202,7 @@ type Obj =  {
 
 在条件类型语句中，可以用 `infer` 声明一个类型变量并且对它进行使用。
 
-```js
+```javascript
 type ReturnType<T> = T extends (
   ...args: any[]
 ) => infer R ? R : any;
@@ -2215,7 +2215,7 @@ type ReturnType<T> = T extends (
 
 有时候我们定义的泛型不想过于灵活或者说想继承某些类等，可以通过 extends 关键字添加泛型约束。
 
-```js
+```javascript
 interface Lengthwise {
   length: number;
 }
@@ -2229,14 +2229,14 @@ function loggingIdentity<T extends Lengthwise>(arg: T): T {
 
 现在这个泛型函数被定义了约束，因此它不再是适用于任意类型：
 
-```js
+```javascript
 loggingIdentity(3);  // Error, number doesn't have a .length property
 复制代码
 ```
 
 这时我们需要传入符合约束类型的值，必须包含length属性：
 
-```js
+```javascript
 loggingIdentity({length: 10, value: 3});
 复制代码
 ```
@@ -2245,7 +2245,7 @@ loggingIdentity({length: 10, value: 3});
 
 在实际开发中，我们经常能遇到这样的场景，在对象中获取一些属性的值，然后建立对应的集合。
 
-```js
+```javascript
 let person = {
     name: 'musion',
     age: 35
@@ -2262,7 +2262,7 @@ console.log(getValues(person, ['gender'])) // [undefined]
 
 在上述例子中，可以看到getValues(persion, ['gender'])打印出来的是[undefined]，但是ts编译器并没有给出报错信息，那么如何使用ts对这种模式进行类型约束呢？这里就要用到了索引类型,改造一下getValues函数，通过 **索引类型查询**和 **索引访问** 操作符：
 
-```js
+```javascript
 function getValues<T, K extends keyof T>(person: T, keys: K[]): T[K][] {
   return keys.map(key => person[key]);
 }
@@ -2287,7 +2287,7 @@ getValues(person, ['gender']) // 报错：
 
 编译器会检查传入的值是否是Person的一部分。通过下面的概念来理解上面的代码：
 
-```js
+```javascript
 T[K]表示对象T的属性K所表示的类型，在上述例子中，T[K][] 表示变量T取属性K的值的数组
 
 // 通过[]索引类型访问操作符, 我们就能得到某个索引的类型
@@ -2302,7 +2302,7 @@ class Person {
 
 介绍完概念之后，应该就可以理解上面的代码了。首先看泛型，这里有T和K两种类型，根据类型推断，第一个参数person就是person，类型会被推断为Person。而第二个数组参数的类型推断（K extends keyof T），keyof关键字可以获取T，也就是Person的所有属性名，即['name', 'age']。而extends关键字让泛型K继承了Person的所有属性名，即['name', 'age']。这三个特性组合保证了代码的动态性和准确性，也让代码提示变得更加丰富了
 
-```js
+```javascript
 getValues(person, ['gender']) // 报错：
 // Argument of Type '"gender"[]' is not assignable to parameter of type '("name" | "age")[]'.
 // Type "gender" is not assignable to type "name" | "age".
@@ -2315,7 +2315,7 @@ getValues(person, ['gender']) // 报错：
 
 比如我们定义一个接口
 
-```js
+```javascript
 interface TestInterface{
     name:string,
     age:number
@@ -2325,7 +2325,7 @@ interface TestInterface{
 
 我们把上面定义的接口里面的属性全部变成可选
 
-```js
+```javascript
 // 我们可以通过+/-来指定添加还是删除
 
 type OptionalTestInterface<T> = {
@@ -2342,7 +2342,7 @@ type newTestInterface = OptionalTestInterface<TestInterface>
 
 比如我们再加上只读
 
-```js
+```javascript
 type OptionalTestInterface<T> = {
  +readonly [p in keyof T]+?:T[p]
 }
@@ -2365,7 +2365,7 @@ type newTestInterface = OptionalTestInterface<TestInterface>
 
 #### 定义
 
-```js
+```javascript
 type Partial<T> = {
   [P in keyof T]?: T[P];
 };
@@ -2376,7 +2376,7 @@ type Partial<T> = {
 
 #### 举例说明
 
-```js
+```javascript
 interface UserInfo {
     id: string;
     name: string;
@@ -2390,7 +2390,7 @@ const xiaoming: UserInfo = {
 
 使用  `Partial<T>`
 
-```js
+```javascript
 type NewUserInfo = Partial<UserInfo>;
 const xiaoming: NewUserInfo = {
     name: 'xiaoming'
@@ -2400,7 +2400,7 @@ const xiaoming: NewUserInfo = {
 
 这个  NewUserInfo 就相当于
 
-```js
+```javascript
 interface NewUserInfo {
     id?: string;
     name?: string;
@@ -2410,7 +2410,7 @@ interface NewUserInfo {
 
 但是 `Partial<T>` 有个局限性，就是只支持处理第一层的属性，如果我的接口定义是这样的
 
-```js
+```javascript
 interface UserInfo {
     id: string;
     name: string;
@@ -2436,7 +2436,7 @@ const xiaoming: NewUserInfo = {
 
 #### DeepPartial
 
-```js
+```javascript
 type DeepPartial<T> = {
      // 如果是 object，则递归类型
     [U in keyof T]?: T[U] extends object
@@ -2454,7 +2454,7 @@ type PartialedWindow = DeepPartial<T>; // 现在T上所有属性都变成了可�
 
 #### 定义
 
-```js
+```javascript
 type Required<T> = { 
     [P in keyof T]-?: T[P] 
 };
@@ -2463,7 +2463,7 @@ type Required<T> = {
 
 其中 `-?` 是代表移除 `?` 这个 modifier 的标识。再拓展一下，除了可以应用于 `?` 这个 modifiers ，还有应用在 `readonly` ，比如 `Readonly<T>` 这个类型
 
-```js
+```javascript
 type Readonly<T> = {
     readonly [p in keyof T]: T[p];
 }
@@ -2476,7 +2476,7 @@ type Readonly<T> = {
 
 #### 定义
 
-```js
+```javascript
 type Readonly<T> = {
  readonly [P in keyof T]: T[P];
 };
@@ -2485,7 +2485,7 @@ type Readonly<T> = {
 
 #### 举例说明
 
-```js
+```javascript
 interface Todo {
  title: string;
 }
@@ -2504,7 +2504,7 @@ todo.title = "Hello"; // Error: cannot reassign a readonly property
 
 #### 定义
 
-```js
+```javascript
 type Pick<T, K extends keyof T> = {
     [P in K]: T[P];
 };
@@ -2513,7 +2513,7 @@ type Pick<T, K extends keyof T> = {
 
 #### 举例说明
 
-```js
+```javascript
 interface Todo {
   title: string;
   description: string;
@@ -2535,7 +2535,7 @@ const todo: TodoPreview = {
 
 #### 定义
 
-```js
+```javascript
 type Record<K extends keyof any, T> = {
     [P in K]: T;
 };
@@ -2544,7 +2544,7 @@ type Record<K extends keyof any, T> = {
 
 #### 举例说明
 
-```js
+```javascript
 interface PageInfo {
   title: string;
 }
@@ -2565,7 +2565,7 @@ const x: Record<Page, PageInfo> = {
 
 #### 定义
 
-```js
+```javascript
 type ReturnType<T extends (...args: any[]) => any> = T extends (
   ...args: any[]
 ) => infer R
@@ -2578,7 +2578,7 @@ type ReturnType<T extends (...args: any[]) => any> = T extends (
 
 #### 举例说明
 
-```js
+```javascript
 type Func = (value: number) => string;
 const foo: ReturnType<Func> = "1";
 复制代码
@@ -2592,7 +2592,7 @@ const foo: ReturnType<Func> = "1";
 
 #### 定义
 
-```js
+```javascript
 type Exclude<T, U> = T extends U ? never : T;
 复制代码
 ```
@@ -2601,7 +2601,7 @@ type Exclude<T, U> = T extends U ? never : T;
 
 #### 举例说明
 
-```js
+```javascript
 type T0 = Exclude<"a" | "b" | "c", "a">; // "b" | "c"
 type T1 = Exclude<"a" | "b" | "c", "a" | "b">; // "c"
 type T2 = Exclude<string | number | (() => void), Function>; // string | number
@@ -2614,14 +2614,14 @@ type T2 = Exclude<string | number | (() => void), Function>; // string | number
 
 #### 定义
 
-```js
+```javascript
 type Extract<T, U> = T extends U ? T : never;
 复制代码
 ```
 
 #### 举例说明
 
-```js
+```javascript
 type T0 = Extract<"a" | "b" | "c", "a" | "f">; // "a"
 type T1 = Extract<string | number | (() => void), Function>; // () =>void
 复制代码
@@ -2633,14 +2633,14 @@ type T1 = Extract<string | number | (() => void), Function>; // () =>void
 
 #### 定义
 
-```js
+```javascript
 type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 复制代码
 ```
 
 #### 举例说明
 
-```js
+```javascript
 interface Todo {
   title: string;
   description: string;
@@ -2662,14 +2662,14 @@ const todo: TodoPreview = {
 
 #### 定义
 
-```js
+```javascript
 type NonNullable<T> = T extendsnull | undefined ? never : T;
 复制代码
 ```
 
 #### 举例说明
 
-```js
+```javascript
 type T0 = NonNullable<string | number | undefined>; // string | number
 type T1 = NonNullable<string[] | null | undefined>; // string[]
 复制代码
@@ -2681,7 +2681,7 @@ type T1 = NonNullable<string[] | null | undefined>; // string[]
 
 #### 定义
 
-```js
+```javascript
 type Parameters<T extends (...args: any) => any> = T extends (...args: infer P) => any
 ? P : never;
 复制代码
@@ -2689,7 +2689,7 @@ type Parameters<T extends (...args: any) => any> = T extends (...args: infer P) 
 
 #### 举例说明
 
-```js
+```javascript
 type A = Parameters<() =>void>; // []
 type B = Parameters<typeofArray.isArray>; // [any]
 type C = Parameters<typeofparseInt>; // [string, (number | undefined)?]
@@ -2714,7 +2714,7 @@ tsconfig.json 包含 TypeScript 编译的相关配置，通过更改编译配置
 
 ## compilerOptions 选项
 
-```js
+```javascript
 {
   "compilerOptions": {
   
@@ -2778,7 +2778,7 @@ tsconfig.json 包含 TypeScript 编译的相关配置，通过更改编译配置
 
 对于刚接触 TypeScript 的小伙伴来说，在定义接口时，可能一不小心会出现以下类似的重复代码。比如：
 
-```js
+```javascript
 interface Person {
   firstName: string;
   lastName: string;
@@ -2794,7 +2794,7 @@ interface PersonWithBirthDate {
 
 很明显，相对于 `Person` 接口来说，`PersonWithBirthDate` 接口只是多了一个 `birth` 属性，其他的属性跟 `Person` 接口是一样的。那么如何避免出现例子中的重复代码呢？要解决这个问题，可以利用 `extends` 关键字：
 
-```js
+```javascript
 interface Person { 
   firstName: string; 
   lastName: string;
@@ -2808,14 +2808,14 @@ interface PersonWithBirthDate extends Person {
 
 当然除了使用 `extends` 关键字之外，也可以使用交叉运算符（&）：
 
-```js
+```javascript
 type PersonWithBirthDate = Person & { birth: Date };
 复制代码
 ```
 
 另外，有时候你可能还会发现自己想要定义一个类型来匹配一个初始配置对象的「形状」，比如：
 
-```js
+```javascript
 const INIT_OPTIONS = {
   width: 640,
   height: 480,
@@ -2834,14 +2834,14 @@ interface Options {
 
 其实，对于 Options 接口来说，你也可以使用 typeof 操作符来快速获取配置对象的「形状」：
 
-```js
+```javascript
 type Options = typeof INIT_OPTIONS;
 复制代码
 ```
 
 在实际的开发过程中，重复的类型并不总是那么容易被发现。有时它们会被语法所掩盖。比如有多个函数拥有相同的类型签名：
 
-```js
+```javascript
 function get(url: string, opts: Options): Promise<Response> { /* ... */ } 
 function post(url: string, opts: Options): Promise<Response> { /* ... */ }
 复制代码
@@ -2849,7 +2849,7 @@ function post(url: string, opts: Options): Promise<Response> { /* ... */ }
 
 对于上面的 get 和 post 方法，为了避免重复的代码，你可以提取统一的类型签名：
 
-```js
+```javascript
 type HTTPFunction = (url: string, opts: Options) => Promise<Response>; 
 const get: HTTPFunction = (url, opts) => { /* ... */ };
 const post: HTTPFunction = (url, opts) => { /* ... */ };
@@ -2860,7 +2860,7 @@ const post: HTTPFunction = (url, opts) => { /* ... */ };
 
 假设你正在构建一个音乐集，并希望为专辑定义一个类型。这时你可以使用 `interface` 关键字来定义一个 `Album` 类型：
 
-```js
+```javascript
 interface Album {
   artist: string; // 艺术家
   title: string; // 专辑标题
@@ -2872,7 +2872,7 @@ interface Album {
 
 对于 `Album` 类型，你希望 `releaseDate` 属性值的格式为 `YYYY-MM-DD`，而 `recordingType` 属性值的范围为 `live` 或 `studio`。但因为接口中 `releaseDate` 和 `recordingType` 属性的类型都是字符串，所以在使用 `Album` 接口时，可能会出现以下问题：
 
-```js
+```javascript
 const dangerous: Album = {
   artist: "Michael Jackson",
   title: "Dangerous",
@@ -2884,7 +2884,7 @@ const dangerous: Album = {
 
 虽然 `releaseDate` 和 `recordingType` 的值与预期的格式不匹配，但此时 TypeScript 编译器并不能发现该问题。为了解决这个问题，你应该为 `releaseDate` 和 `recordingType` 属性定义更精确的类型，比如这样：
 
-```js
+```javascript
 interface Album {\
   artist: string; // 艺术家
   title: string; // 专辑标题
@@ -2896,7 +2896,7 @@ interface Album {\
 
 重新定义 `Album` 接口之后，对于前面的赋值语句，TypeScript 编译器就会提示以下异常信息：
 
-```js
+```javascript
 const dangerous: Album = {
   artist: "Michael Jackson",
   title: "Dangerous",
@@ -2910,7 +2910,7 @@ const dangerous: Album = {
 
 为了解决上面的问题，你需要为 `releaseDate` 和 `recordingType` 属性设置正确的类型，比如这样：
 
-```js
+```javascript
 const dangerous: Album = {
   artist: "Michael Jackson",
   title: "Dangerous",
@@ -2924,7 +2924,7 @@ const dangerous: Album = {
 
 假设你正在构建一个允许用户指定页码，然后加载并显示该页面对应内容的 Web 应用程序。首先，你可能会先定义 `State` 对象：
 
-```js
+```javascript
 interface State {
   pageContent: string;
   isLoading: boolean;
@@ -2935,7 +2935,7 @@ interface State {
 
 接着你会定义一个 `renderPage` 函数，用来渲染页面：
 
-```js
+```javascript
 function renderPage(state: State) {
   if (state.errorMsg) {
     return `呜呜呜，加载页面出现异常了...${state.errorMsg}`;
@@ -2954,7 +2954,7 @@ console.log(renderPage({isLoading: false, pageContent: "大家好呀"}));
 
 创建好 `renderPage` 函数，你可以继续定义一个 `changePage` 函数，用于根据页码获取对应的页面数据：
 
-```js
+```javascript
 async function changePage(state: State, newPage: string) {
   state.isLoading = true;
   try {
@@ -2979,7 +2979,7 @@ async function changePage(state: State, newPage: string) {
 
 出现上述问题的原因是，前面定义的 `State` 类型允许同时设置 `isLoading` 和 `errorMsg` 的值，尽管这是一种无效的状态。针对这个问题，你可以考虑引入可辨识联合类型来定义不同的页面请求状态：
 
-```js
+```javascript
 interface RequestPending {
   state: "pending";
 }
@@ -3007,7 +3007,7 @@ interface State {
 
 **更新后的 renderPage 函数**
 
-```js
+```javascript
 function renderPage(state: State) {
   const { currentPage } = state;
   const requestState = state.requests[currentPage];
@@ -3025,7 +3025,7 @@ function renderPage(state: State) {
 
 **更新后的 changePage 函数**
 
-```js
+```javascript
 async function changePage(state: State, newPage: string) {
   state.requests[newPage] = { state: "pending" };
   state.currentPage = newPage;
@@ -3056,10 +3056,3 @@ async function changePage(state: State, newPage: string) {
 # 最后
 
 如果你想学习es7- es12新出的特性，请参考 [快2022年了，这些ES7-ES12的知识点你都掌握了嘛？](https://juejin.cn/post/7046217976176967711)
-
-
-
-作者：jimmy_fx
-链接：https://juejin.cn/post/7018805943710253086
-来源：稀土掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
