@@ -1,0 +1,13 @@
+import{_ as n,c as t,o as a,b as e,d as s}from"./app.1f148b88.js";const v=JSON.parse('{"title":"\u7B11","description":"","frontmatter":{},"headers":[{"level":2,"title":"\u7B11","slug":"\u7B11"}],"relativePath":"files/\u8BFB\u4E66/\u4F60\u662F\u4EBA\u95F4\u56DB\u6708\u5929/\u7B11.md"}'),o={name:"files/\u8BFB\u4E66/\u4F60\u662F\u4EBA\u95F4\u56DB\u6708\u5929/\u7B11.md"},r=e("h2",{id:"\u7B11",tabindex:"-1"},[s("\u7B11 "),e("a",{class:"header-anchor",href:"#\u7B11","aria-hidden":"true"},"#")],-1),c=e("hr",null,null,-1),l=e("pre",null,[e("code",null,`\u7B11\u7684\u662F\u5979\u7684\u7814\u7A76\uFF0C\u53E3\u5507\uFF0C  
+\u548C\u5507\u8FB9\u6DF7\u5143\u7684\u65CB\u6DA1\u3002  
+\u8273\u4E3D\u5982\u540C\u9732\u73E0\uFF0C  
+\u6735\u6735\u7684\u7B11\u5411\u8D1D\u9F7F\u7684\u95EA\u5149\u91CC\u8EB2\u3002  
+\u90A3\u662F\u7B11--\u795E\u7684\u7B11\uFF0C\u7F8E\u7684\u7B11\uFF1B  
+\u6C34\u7684\u6620\u5F71\uFF0C\u98CE\u7684\u8F7B\u6B4C\u3002  
+\u7B11\u7684\u662F\u5979\u60FA\u5FEA\u7684\u5377\u53D1\uFF0C  
+\u6563\u4E71\u7684\u6328\u7740\u5979\u7684\u8033\u6735\u3002  
+\u8F7B\u8F6F\u5982\u540C\u534E\u5F71\uFF0C  
+\u75D2\u75D2\u7684\u751C\u871C\u6D8C\u8FDB\u4E86\u4F60\u7684\u5FC3\u7A9D\u3002  
+\u90A3\u662F\u7B11--\u8BD7\u7684\u7B11\uFF0C\u753B\u7684\u7B11\uFF1A  
+\u4E91\u7684\u7559\u75D5\uFF0C\u6D6A\u7684\u67D4\u6CE2\u3002
+`)],-1),d=[r,c,l];function i(_,h,p,u,f,m){return a(),t("div",null,d)}var $=n(o,[["render",i]]);export{v as __pageData,$ as default};
