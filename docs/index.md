@@ -6,7 +6,7 @@ hero:
   text: Stay Hungry Stay Foolish！
   tagline: 肥且HAPPY
   image:
-    src: /images/suxiaopang.png
+    src: /images/suxiaopang.jpg
     alt: FattySu
   actions:
     - theme: brand
@@ -17,9 +17,9 @@ hero:
       link: https://tommyhu.cn
     - theme: alt
       text: 头条
-      link: https://toutiao.tommyhu.cn
+      link: https://toutiao.tommyhu.me
     - theme: alt
       text: 掘金
-      link: https://juejin.tommyhu.cn
+      link: https://juejin.tommyhu.me
 ---
 
