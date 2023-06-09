@@ -17,9 +17,9 @@ hero:
       link: https://tommyhu.cn
     - theme: alt
       text: 头条
-      link: https://toutiao.tommyhu.me
+      link: https://www.toutiao.com/c/user/token/MS4wLjABAAAAGYWRkYddYziRHVPq9yMNFw1ZrQN3Bf-h2ZoP44ehdL4/
     - theme: alt
       text: 掘金
-      link: https://juejin.tommyhu.me
+      link: https://juejin.cn/user/1838039170823944
 ---
 
