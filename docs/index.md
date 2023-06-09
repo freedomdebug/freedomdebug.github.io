@@ -2,12 +2,12 @@
 layout: home
 
 hero:
-  name: 胡一刀
-  text: 十步杀一人，千里不留行.
-  tagline: 一刀叔叔
+  name: 程序员苏小胖
+  text: Stay Hungry Stay Foolish！
+  tagline: 肥且HAPPY
   image:
-    src: /images/胡一刀.png
-    alt: freedomdebug
+    src: /images/suxiaopang.png
+    alt: FattySu
   actions:
     - theme: brand
       text: 进屋
